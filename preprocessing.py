@@ -2,7 +2,7 @@ def event_preprocessing(df):
     df['id'] = df['id'].astype(str)
     # categorical columns with a name parameter
     obj_to_int = lambda x: x['name'] if type(x)!=float else -1
-    obj_cols = ['player','type','play_pattern', 'possession_team', 'position']
+    obj_cols = ['player','type','play_pattern', 'possession_team','team', 'position']
     for col in obj_cols:
         print(col, end='')
         df[col] = df[col].apply(obj_to_int)
@@ -51,9 +51,7 @@ def event_preprocessing(df):
     # what do you mean by pass Id ?
 
     print('dribble', end='')
-    df['dribble_available'] = df['shot'].apply(lambda x: True if type(x)!=float else False)
-    df['dribble_endlocation_x'] = df['shot'].apply(lambda x: x['end_location'][0] if type(x)!=float else -1)
-    df['dribble_endlocation_y'] = df['shot'].apply(lambda x: x['end_location'][1] if type(x)!=float else -1)
+    df['dribble_available'] = df['dribble'].apply(lambda x: True if type(x)!=float else False)
     print('.... complete')
 
     print('pass', end='')
@@ -63,7 +61,7 @@ def event_preprocessing(df):
     print('.... complete')
 
     # dropping columns
-    df = df.drop(errors='ignore', columns= ['id', 'team','duration','timestamp','related_events', 'tactics', 'location', 'carry', 'ball_receipt', 'shot', 'dribble', 'miscontrol', 'bad_behaviour', 'substitution', 'pass'])
+    df = df.drop(errors='ignore', columns= ['id','duration','timestamp','related_events', 'tactics', 'location', 'carry', 'ball_receipt', 'shot', 'dribble', 'miscontrol', 'bad_behaviour', 'substitution', 'pass'])
     return df
 
 def drop_unprocessed(df):
