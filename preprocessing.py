@@ -63,8 +63,8 @@ def event_preprocessing(df):
     print('.... complete')
 
     # dropping columns
-    df = df.drop(columns= ['id', 'team','duration','timestamp','related_events', 'tactics', 'location', 'carry', 'ball_receipt', 'shot', 'dribble', 'miscontrol', 'bad_behaviour', 'substitution', 'pass'])
+    df = df.drop(errors='ignore', columns= ['id', 'team','duration','timestamp','related_events', 'tactics', 'location', 'carry', 'ball_receipt', 'shot', 'dribble', 'miscontrol', 'bad_behaviour', 'substitution', 'pass'])
     return df
 
 def drop_unprocessed(df):
-    return df.drop(columns= ['interception', 'ball_recovery','goalkeeper', 'clearance', 'block', 'foul_committed', 'foul_won', 'duel','possession'] )
+    return df.drop(errors='ignore', columns= ['interception', 'ball_recovery','goalkeeper', 'clearance', 'block', 'foul_committed', 'foul_won', 'duel','possession'] )
